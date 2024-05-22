@@ -94,34 +94,13 @@ for u1 in range(1,4):
 prob+=lpSum([varp2[pp] for pp in yi1])==ss1
 prob+=lpSum([varp2[pp] for pp in yi2])==ss2
 for i in range(len(xi1)):
-    for j in range(3):
-        prob+=lpSum([varp1[xi1[i][j]]])==d[0][i]
-for i in range(len(xi1)):
-    for j in range(3):
-        prob+=lpSum([varp1[xi2[i][j]]])==d[1][i]
+    prob+=lpSum([varp1[j] for j in xi1[i]])==d[0][i]
+    prob+=lpSum([varp1[j] for j in xi2[i]])==d[1][i]
 
-# # prob+=lpSum([varp1[pp] for pp in xi11])==d[0][0]
-# prob+=lpSum([varp1[pp] for pp in xi12])==d[1][0]
-# # prob+=lpSum([varp1[pp] for pp in xi21])==d[0][1]
-# prob+=lpSum([varp1[pp] for pp in xi22])==d[1][1]
-# # prob+=lpSum([varp1[pp] for pp in xi31])==d[0][2]
-# prob+=lpSum([varp1[pp] for pp in xi32])==d[1][2]
-# # prob+=lpSum([varp1[pp] for pp in xi41])==d[0][3]
-# prob+=lpSum([varp1[pp] for pp in xi42])==d[1][3]
-# # prob+=lpSum([varp1[pp] for pp in xi51])==d[0][4]
-# prob+=lpSum([varp1[pp] for pp in xi52])==d[1][4]
-prob+=lpSum([varp1[pp] for pp in x1j1])<=s[0]
-prob+=lpSum([varp1[pp] for pp in x2j1])<=s[1]
-prob+=lpSum([varp1[pp] for pp in x3j1])<=s[2]
-prob+=lpSum([varp1[pp] for pp in x1j2])<=s[0]
-prob+=lpSum([varp1[pp] for pp in x2j2])<=s[1]
-prob+=lpSum([varp1[pp] for pp in x3j2])<=s[2]
+for i in range(len(xj1)):
+    prob += lpSum([varp1[j] for j in xj1[i]]) <= s[i]
+    prob += lpSum([varp1[j] for j in xj2[i]]) <= s[i]
 
-prob+=lpSum([varp1[pp] for pp in x1j1])+lpSum([varp1[pp] for pp in x2j1])<=lpSum([varp1[pp] for pp in x3j1])+min(ss1,s[2])*varp3[(1)]
-prob+=lpSum([varp1[pp] for pp in x1j1])+lpSum([varp1[pp] for pp in x2j1])>=lpSum([varp1[pp] for pp in x3j1])-min(ss1,s[2])*(1-varp3[(1)])
-#второй период
-prob+=lpSum([varp1[pp] for pp in x1j2])+lpSum([varp1[pp] for pp in x2j2])<=lpSum([varp1[pp] for pp in x3j2])+min(ss2,s[2])*varp3[(2)]
-prob+=lpSum([varp1[pp] for pp in x1j2])+lpSum([varp1[pp] for pp in x2j2])>=lpSum([varp1[pp] for pp in x3j2])-min(ss2,s[2])*(1-varp3[(2)])
 
 prob+=lpSum([varp2[pp] for pp in yi1])==lpSum([varp1[pp] for pp in x1j1])+lpSum([varp1[pp] for pp in x2j1])+lpSum([varp1[pp] for pp in x3j1])
 prob+=lpSum([varp2[pp] for pp in yi2])==lpSum([varp1[pp] for pp in x1j2])+lpSum([varp1[pp] for pp in x2j2])+lpSum([varp1[pp] for pp in x3j2])
@@ -134,6 +113,7 @@ prob+=varp2[(2,1)]==lpSum([varp1[pp] for pp in x2j1])
 prob+=varp2[(2,2)]==lpSum([varp1[pp] for pp in x2j2])
 prob+=varp2[(3,1)]==lpSum([varp1[pp] for pp in x3j1])
 prob+=varp2[(3,2)]==lpSum([varp1[pp] for pp in x3j2])
+
 #print(prob)
 # решаем задачи линейного программирования
 prob.solve()
